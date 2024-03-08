@@ -109,3 +109,28 @@ Vous devez compléter le projet github existant, en précisant votre demarche po
 Ajout de l'ip dans webhook pour détecter les modifications sur mon dépot git.
 
 ![Webhook](/media/screen1.png "Webhook")
+
+## Configuration GoLand Avec Jenkins
+Configuration du plugin Jenkins dans GoLand pour afficher mes différents jobs
+
+![GoLand](/media/screen3.png "GoLand")
+
+## Visualisation du pipeline sur Jenkins et Chainage
+![Pipeline](/media/screen2.png "Pipeline")
+Création d'une pipeline avec 2 tâches comme demandé
+- **flask-pandas-docker** : Il est conçu pour récupérer automatiquement les informations à chaque "push" sur le dépôt Git, grâce à un webhook. Il utilise ensuite ces informations pour construire une nouvelle image Docker et la déployer sur le serveur. Il convient de noter qu'il est recommandé de prévoir également l'arrêt et la suppression de l'ancienne instance Docker pour éviter tout problème potentiel.
+- **flask-pandas-jmeter** : Il est dédié à la vérification de l'existence des données. Il est conçu pour être déclenché uniquement si l'exécution de Flask-Pandas-Docker n'a pas généré d'erreur.
+
+## Job flask panda jmeter
+Création dun job flask-panda-jmeter
+
+J'ai mis Une étape de builds avec exécution d'un script shell :
+
+```shell
+jmeter -JUSER=50 -JDELAY=20 -Jjmeter.save.saveservice.output_format=xml -Jjmeter.save.saveservice.response_data.on_error=true -n -t flask_pandas_test_plan.jmx  -l testresult.jlt
+```
+
+Mon test ce lance pour 20 utilisateurs avec un délai de 10 secondes.
+Mon test JMeter est conçu pour vérifier la présence de données sur la page /data. En effet, si JMeter détecte un résultat différent de "Rows = 0", cela signifie que des données existent. De plus, nous pouvons également vérifier que "Rows = 5" pour nous assurer qu'il y a toujours cinq données présentes.
+
+Après cette vérification, j'ai ajouté des étapes supplémentaires à exécuter après la construction. Ces étapes incluent l'analyse de la sortie de la console et la publication d'un test de performance.
