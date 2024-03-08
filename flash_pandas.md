@@ -6,7 +6,7 @@ de produit informatique qui est, pour le moment, une application Python Flask de
 Vous devez compléter le projet github existant, en précisant votre demarche pour porter ce projet dans la chaine ci/cd.
 
 ## Installation
-   
+    
 1. Clonez le dépôt GitHub :
     ```bash
     git clone https://github.com/arthurferreira64/sample-flask-pandas-dataframe.git
