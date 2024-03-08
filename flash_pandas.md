@@ -120,7 +120,7 @@ Création d'une pipeline avec 2 tâches comme demandé
 
 ![Pipeline](/media/screen2.png "Pipeline")
 - **flask-pandas-docker** : Il est conçu pour récupérer automatiquement les informations à chaque "push" sur le dépôt Git, grâce à un webhook. Il utilise ensuite ces informations pour construire une nouvelle image Docker et la déployer sur le serveur. Il convient de noter qu'il est recommandé de prévoir également l'arrêt et la suppression de l'ancienne instance Docker pour éviter tout problème potentiel.
-- **flask-pandas-jmeter** : Il est dédié à la vérification de l'existence des données. Il est conçu pour être déclenché uniquement si l'exécution de Flask-Pandas-Docker n'a pas généré d'erreur.
+- **flask-panda-jmeter** : Il est dédié à la vérification de l'existence des données. Il est conçu pour être déclenché uniquement si l'exécution de Flask-Pandas-Docker n'a pas généré d'erreur.
 
 ## Job flask panda jmeter
 Création dun job flask-panda-jmeter
